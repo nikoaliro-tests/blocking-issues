@@ -49,10 +49,7 @@ export async function update(issue) {
 			if (oldComment) await github.deleteComment(oldComment);
 			core.debug("Removed comment");
 			sendSlack(issue);
-		} catch (error) { /* No action needed if issue is not already blocked. */
-			core.debug("not already blocked");
-			core.error(error)
-		}
+		} catch (error) { /* No action needed if issue is not already blocked. */}
 		return;
 	}
 
