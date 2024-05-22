@@ -1,4 +1,5 @@
 import * as core from '@actions/core';
+import axios from 'axios';
 
 const regex = /blocked by:? ([#\d, ]+)/ig;
 
