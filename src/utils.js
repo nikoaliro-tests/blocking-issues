@@ -42,8 +42,8 @@ export function getCommentText(blockingIssues, openIssues, brokenIssues) {
 
 export async function sendSlack(issue) {
 	const webhookUrl = core.getInput("webhook-url");
+	core.debug(`Sending slack message tp ${webhookUrl} about #${issue.number} - ${issue.title}.`);
 	if (webhookUrl) {
-		core.debug(`Sending slack message tp ${webhookUrl} about #${issue.number} - ${issue.title}.`);
 		const payload = {
 			"pull_request_number": issue.number,
 			"pull_request_title": issue.title
