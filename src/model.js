@@ -42,7 +42,7 @@ export async function update(issue) {
 	if (blockingIssueNumbers.length == 0) {
 		core.info("No blocking issues -- removing comment and label");
 		try {
-			await github.removeLabel(issue.number, label);
+			await github.removeLabel(issue.number, label.name);
 			core.debug("Removed label");
 			// If comment is present, remove it
 			const oldComment = await github.getCommentID(issue.number);
