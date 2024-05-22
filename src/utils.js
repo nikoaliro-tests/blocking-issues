@@ -1,3 +1,5 @@
+import * as core from '@actions/core';
+
 const regex = /blocked by:? ([#\d, ]+)/ig;
 
 export const signature = "This comment was automatically written by the [Blocking Issues](https://github.com/Levi-Lesches/blocking-issues) bot, and this PR will be monitored for further progress.";
@@ -35,4 +37,16 @@ export function getCommentText(blockingIssues, openIssues, brokenIssues) {
 	result += "----\n";
 	result += signature;
 	return result;
+}
+
+export async function sendSlack(issue) {
+	const webhookUrl = core.getInput("webhook-url");
+	if (webhookUrl) {
+		core.debug(`Sending slack message tp ${webhookUrl} about #${issue.number} - ${issue.title}.`);
+		const payload = {
+			"pull_request_number": issue.number,
+			"pull_request_title": issue.title
+		};
+		await axios.post(webhookUrl, payload, {});
+	}
 }

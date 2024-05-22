@@ -1,6 +1,7 @@
 import * as core from "@actions/core";
 import * as github from "./github.js";
 import * as utils from "./utils.js";
+import { sendSlack } from './utils.js';
 
 export async function getCurrentIssue() {
 	return await github.getIssue(await github.getCurrentIssueNumber());
@@ -47,6 +48,7 @@ export async function update(issue) {
 			const oldComment = await github.getCommentID(issue.number);
 			if (oldComment) await github.deleteComment(oldComment);
 			core.debug("Removed comment");
+			sendSlack(issue);
 		} catch (error) { /* No action needed if issue is not already blocked. */}
 		return;
 	}

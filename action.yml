@@ -5,6 +5,9 @@ inputs:
     description: "The GitHub token to use. Make sure to use a Personal Access Token, so PRs can be updated." 
     required: false
     default: ${{ github.token }}
+  webhook-url:
+    description: "The Slack Webhook URL to use."
+    required: true
   use-label: 
     description: "The name of the label to apply to blocked issues or pull requests. If not found, the default value will be used."
     required: false
